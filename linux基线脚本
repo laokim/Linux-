@@ -1,0 +1,77 @@
+#vim check.bash 创建bash脚本  bash check.bash 执行脚本  cat check.txt 查看结果
+#1 身份鉴别 2 访问控制 3 安全审计 4 入侵防范
+
+echo "---------------------------------------------------------------" >> check.txt;
+echo "---------------------------------------------------------------" >> check.txt;
+echo "1.A:(about:PW)" >> check.txt;
+echo "" >> check.txt;
+echo "/etc/login.defs | grep PASS :" >> check.txt;
+cat /etc/login.defs | grep PASS>> check.txt 2>&1;
+echo "" >> check.txt;
+echo "/etc/pam.d/system-auth | grep password | grep requisite :" >> check.txt;
+cat /etc/pam.d/system-auth | grep password | grep requisite >> check.txt 2>&1;
+echo "---------------------------------------------------------------" >> check.txt;
+echo "---------------------------------------------------------------" >> check.txt;
+
+echo "1.B:(about:LOGIN)" >> check.txt;
+echo "" >> check.txt;
+echo "/etc/login.defs | grep PASS :" >> check.txt;
+cat /etc/pam.d/sshd | grep auth | grep required>> check.txt 2>&1;
+echo "" >> check.txt;
+echo "/etc/profile | grep TMOUT:" >> check.txt;
+cat /etc/profile | grep TMOUT>> check.txt 2>&1;
+echo "---------------------------------------------------------------" >> check.txt;
+echo "---------------------------------------------------------------" >> check.txt;
+
+echo "1.C:(about:TELNET)" >> check.txt;
+echo "" >> check.txt;
+echo "rpm -qa | grep telnet :" >> check.txt;
+rpm -qa | grep telnet>> check.txt 2>&1;
+echo "" >> check.txt;
+echo "cat /etc/xinetd.d/telnet :" >> check.txt;
+cat /etc/xinetd.d/telnet >> check.txt 2>&1;
+echo "" >> check.txt;
+echo "netstat -ntlp(about:open server) :" >> check.txt;
+netstat -ntlp>> check.txt 2>&1;
+echo "---------------------------------------------------------------" >> check.txt;
+echo "---------------------------------------------------------------" >> check.txt;
+
+echo "2.BCD:(about:USER)" >> check.txt;
+echo "" >> check.txt;
+echo "cat /etc/shadow :" >> check.txt;
+cat /etc/shadow >> check.txt 2>&1;
+echo "---------------------------------------------------------------" >> check.txt;
+echo "---------------------------------------------------------------" >> check.txt;
+
+echo "2.G:(about:SELinux)" >> check.txt;
+echo "" >> check.txt;
+echo "setenforce 1 :" >> check.txt;
+setenforce 1 >> check.txt 2>&1;
+echo "" >> check.txt;
+echo "cat /etc/selinux/config :" >> check.txt;
+cat /etc/selinux/config >> check.txt 2>&1;
+echo "---------------------------------------------------------------" >> check.txt;
+echo "---------------------------------------------------------------" >> check.txt;
+
+echo "3.AB:(about:auditd AND rsyslog)" >> check.txt;
+echo "" >> check.txt;
+echo "ps -ef | grep 'auditd\|rsyslog' :" >> check.txt;
+ps -ef | grep 'auditd\|rsyslog' >> check.txt 2>&1;
+echo "---------------------------------------------------------------" >> check.txt;
+echo "---------------------------------------------------------------" >> check.txt;
+
+echo "4.AB:(about:Program)" >> check.txt;
+echo "" >> check.txt;
+echo "ps -aux :" >> check.txt;
+ps -aux >> check.txt 2>&1;
+echo "---------------------------------------------------------------" >> check.txt;
+echo "---------------------------------------------------------------" >> check.txt;
+
+echo "4.C:(about:Hosts)" >> check.txt;
+echo "cat /etc/hosts.allow" >> check.txt;
+cat /etc/hosts.allow >> check.txt 2>&1;
+echo "" >> check.txt;
+echo "cat /etc/hosts.deny" >> check.txt;
+cat /etc/hosts.deny >> check.txt 2>&1;
+echo "---------------------------------------------------------------" >> check.txt;
+echo "---------------------------------------------------------------" >> check.txt;
